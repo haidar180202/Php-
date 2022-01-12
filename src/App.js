@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useState } from "react";
+import Navbar from "./components/Navbar";
+import Beranda from "./components/Beranda";
+import ManajementBuku from "./components/ManajemenBuku";
+import "bootstrap/dist/css/bootstrap.css";
+
 
 function App() {
+  const [books, setBooks] = useState([
+    {_id: 1 , judul: "LaskarPelangi", pengarang: "Andrea Hirata", Harga: 80000, stok: 7},
+    {_id: 2 , judul: "Bumi", pengarang: "Tere liye", Harga: 85000, stok: 5}
+  ])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div> 
+    <Router> 
+        <Navbar/>
+        <Routes>
+          <Route path = "/" element={<Beranda/>}/>
+          <Route path="/manajemen-buku" element ={<ManajementBuku bookList={books} />}/>
+        </Routes> 
+    </Router>
     </div>
   );
 }
